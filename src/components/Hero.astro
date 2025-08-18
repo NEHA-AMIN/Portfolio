@@ -1,0 +1,202 @@
+---
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+
+/**
+ * Hero Component
+ *
+ * @description A component that displays a hero section with a title, description, and image
+ */
+interface Props {
+  /**
+   * The source URL for the image
+   */
+  src?: string
+}
+
+const { src = '/images/profile/preet-2.png' }: Props = Astro.props
+---
+
+<section class="hero my-24">
+  <div class="container">
+    <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+      <div class="flex flex-col items-center gap-8 md:items-start">
+        <div class="hero-intro">
+          <p class="greeting typing-animation">Hi, this is</p>
+          <h1 class="text-center text-6xl md:text-left lg:text-8xl">
+            <span class="text-gradient name-typing has-sweep">Neha Amin</span>
+          </h1>
+          <p class="description">
+            IEO, NSO - Gold Medalist || Research Scholar || Vice Chairperson-IEEE SB DSU || Pre-Final Year Student
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 min-[500px]:flex-row">
+          <a class="button has-icon" href="/projects/">
+            <Icon name="lucide:folder" />
+            My Projects
+          </a>
+          <a class="button has-icon color-secondary" href="/experience/">
+            <Icon name="lucide:briefcase" />
+            My Experience
+          </a>
+        </div>
+      </div>
+      <Image class="hero-image hidden lg:block pixelated-entry" src={src} alt="Neha Amin Profile Photo" decoding="async" width={800} height={600} loading="eager" />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  h1 {
+    text-wrap: unset;
+  }
+
+  .hero-intro {
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+
+    .greeting {
+      font-size: var(--font-size-l);
+      color: var(--foreground-color-muted);
+      margin-bottom: var(--space-xs);
+      font-weight: 400;
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      border-right: 2px solid var(--color-primary-300);
+      white-space: nowrap;
+      animation: typewriter 2s steps(12) 3.5s both, blink 1s infinite 5.5s;
+      width: fit-content;
+    }
+
+    .name-typing {
+      animation: nameTypewriter 2s steps(9) 5.7s both;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      display: inline-block;
+      
+      &.has-sweep {
+        position: relative;
+        isolation: isolate;
+        
+        &::after {
+          content: "";
+          position: absolute;
+          inset: -10% -20%;
+          background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,.0) 35%, rgba(255,255,255,.5) 50%, rgba(255,214,102,.45) 52%, transparent 70%);
+          transform: translateX(-130%) skewX(-12deg);
+          mix-blend-mode: screen;
+          animation: name-sweep 1.4s ease-out 7.8s forwards; /* runs after name typing completes */
+          pointer-events: none;
+        }
+      }
+    }
+
+    .description {
+      font-size: var(--font-size-l);
+      color: var(--foreground-color-muted);
+      line-height: 1.6;
+      margin-top: var(--space-m);
+      max-width: 600px;
+      
+      @media (min-width: 768px) {
+        font-size: var(--font-size-xl);
+      }
+    }
+  }
+
+  @keyframes typewriter {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+
+  @keyframes nameTypewriter {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+
+  @keyframes blink {
+    0%, 50% { border-color: var(--color-primary-300); }
+    51%, 100% { border-color: transparent; }
+  }
+
+  @keyframes name-sweep {
+    0%   { transform: translateX(-130%) skewX(-12deg); opacity: 0; }
+    20%  { opacity: .9; }
+    100% { transform: translateX(130%) skewX(-12deg); opacity: 0; }
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      315deg,
+      light-dark(var(--color-primary-300), var(--color-secondary-100)) 25%,
+      light-dark(var(--color-secondary-300), var(--color-primary-200))
+    );
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-image {
+    border-radius: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    &.pixelated-entry {
+      animation: pixelateToSmooth 3s ease-out 0.5s both;
+    }
+  }
+
+  @keyframes pixelateToSmooth {
+    0% {
+      filter: pixelated blur(0px);
+      image-rendering: pixelated;
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    25% {
+      filter: blur(8px);
+      image-rendering: pixelated;
+      transform: scale(0.85);
+      opacity: 0.3;
+    }
+    50% {
+      filter: blur(4px);
+      image-rendering: auto;
+      transform: scale(0.9);
+      opacity: 0.6;
+    }
+    75% {
+      filter: blur(2px);
+      image-rendering: auto;
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+    100% {
+      filter: blur(0px);
+      image-rendering: auto;
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .button {
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+  }
+</style>

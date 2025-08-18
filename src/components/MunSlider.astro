@@ -1,0 +1,118 @@
+---
+/**
+ * MunSlider Component (Astro)
+ * Simple sequential slider - All 11 MUN images
+ */
+const IMAGES = [
+  `/images/MUN-FINAL/img1.jpg`,
+  `/images/MUN-FINAL/img2.jpg`,
+  `/images/MUN-FINAL/img3.jpg`,
+  `/images/MUN-FINAL/img4.jpg`,
+  `/images/MUN-FINAL/img5.jpg`,
+  `/images/MUN-FINAL/img6.jpg`,
+  `/images/MUN-FINAL/img7.jpg`,
+  `/images/MUN-FINAL/img8.jpg`,
+  `/images/MUN-FINAL/img9.jpg`,
+  `/images/MUN-FINAL/img10.jpg`,
+  `/images/MUN-FINAL/img11.jpg`
+];
+---
+<div class="mun-slider">
+  <div class="slider-container">
+    <div class="slider-track">
+      {IMAGES.map((src, i) => (
+        <img 
+          src={src} 
+          alt={`MUN moment ${i+1}`} 
+          class={i === 0 ? 'active' : ''} 
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    console.log('MUN slider starting...');
+    
+    setTimeout(() => {
+      const images = document.querySelectorAll('.mun-slider .slider-track img');
+      
+      console.log('Found MUN images:', images.length);
+      console.log('Image sources:', Array.from(images).map(img => img.src));
+      
+      let currentIndex = 0;
+      
+      function showImage(index) {
+        console.log('Showing MUN image:', index);
+        
+        // Hide all images
+        images.forEach((img, i) => {
+          img.classList.toggle('active', i === index);
+        });
+      }
+      
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      }
+      
+      // Auto-advance every 3 seconds
+      setInterval(nextImage, 3000);
+      
+    }, 100); // Small delay to ensure DOM is ready
+  })();
+</script>
+
+<style>
+  .mun-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider-track img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: 12px;
+  }
+
+  .slider-track img.active {
+    opacity: 1;
+  }
+
+  .slider-track img:first-child {
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .mun-slider {
+      border-radius: 8px;
+    }
+    
+    .slider-track img {
+      border-radius: 8px;
+    }
+  }
+</style>

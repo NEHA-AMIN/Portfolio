@@ -1,0 +1,115 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import PageHeader from '../components/PageHeader.astro'
+
+const projects = [
+  {
+    title: "TUPE-DELV: Advanced Transformer Architecture",
+    description: "Research project exploring novel positional encoding techniques in transformer architectures for enhanced time series analysis.",
+    fullDescription: [
+      "Conducting cutting-edge research on transformer architecture with specialized focus on reinterpreting positional encoding mechanisms in embedding stages.",
+      "Developing innovative approaches to time series analysis using transformers that reduce reliance on traditional backpropagation optimization methods.",
+      "Implementing and experimenting with various positional encoding architectures including TUPE, Rotary Positional Encoding (RoPE), and sinusoidal PE.",
+      "Creating advanced models that learn through sophisticated information encoding mechanisms rather than conventional gradient-based optimization techniques.",
+      "Contributing to the advancement of transformer architectures in time series prediction, analysis, and next-generation sequence modeling applications."
+    ],
+    technologies: ["Transformers", "Time Series Analysis", "TUPE", "RoPE", "Sinusoidal PE", "Deep Learning", "Research", "PyTorch"],
+    githubUrl: "https://github.com/NEHA-AMIN/TUPE-DELV",
+    category: "AI Research",
+    status: "In Progress",
+    image: "/images/projects/tupe.png"
+  },
+  {
+    title: "AI-Driven Defect Detection (NDT)",
+    description: "Advanced computer vision system for automated defect detection in Ultrasonic Polymer Welding with real-time inspection capabilities.",
+    fullDescription: [
+      "Engineered an AI-driven defect detection system for Ultrasonic Polymer Welding using KMeans clustering and HOG feature extraction.",
+      "Implemented CLAHE-based contrast enhancement algorithms to improve defect visualization in complex industrial weld images.",
+      "Developed real-time automated inspection pipeline with high accuracy defect identification and classification capabilities.",
+      "Built Flask-powered web interface providing intuitive defect reporting, analysis dashboard, and comprehensive inspection results.",
+      "Integrated OpenCV computer vision libraries for advanced image processing and feature extraction in industrial applications."
+    ],
+    technologies: ["Computer Vision", "Python", "Flask", "OpenCV", "KMeans Clustering", "HOG Features", "CLAHE", "Image Processing"],
+    githubUrl: "https://github.com/NEHA-AMIN/AI-Defect-Detection-UPW",
+    category: "Computer Vision",
+    status: "Completed",
+    image: "/images/projects/project1.png"
+  },
+  {
+    title: "Multi-Agent Market Researcher",
+    description: "AI-powered intelligent research platform utilizing multi-agent systems for comprehensive market research and dataset collection.",
+    fullDescription: [
+      "Engineered advanced AI-powered research platform leveraging multi-agent systems to automate comprehensive market research across emerging technologies.",
+      "Implemented intelligent market research agents conducting deep analysis on cutting-edge developments in AI and data science domains.",
+      "Developed sophisticated use case generation algorithms identifying and proposing strategic applications aligned with industry trends and objectives.",
+      "Built automated dataset collection system intelligently searching and aggregating resources from Kaggle, HuggingFace, and GitHub platforms.",
+      "Integrated LangChain's Agent and Task components creating seamless workflow orchestration with intuitive Streamlit-powered user interface."
+    ],
+    technologies: ["Streamlit", "LangChain", "Multi-Agent Systems", "AI Agents", "Market Research", "Data Collection", "NLP", "Python"],
+    githubUrl: "https://github.com/NEHA-AMIN/Multi-agent-Researcher",
+    category: "AI Automation",
+    status: "Completed",
+    image: "/images/projects/multi-agent.webp"
+  },
+  {
+    title: "MEDIA - Social Media Clone",
+    description: "Full-stack social media platform featuring real-time chat, comprehensive user profiles, and advanced social networking capabilities.",
+    fullDescription: [
+      "Developed complete full-stack social media application with secure user authentication, profile management, and real-time communication systems.",
+      "Implemented robust JWT authentication system with bcrypt password encryption and Redux-based session management for enhanced security.",
+      "Built comprehensive user profile system with photo uploads, follower/following functionality, and detailed profile statistics tracking.",
+      "Created real-time chat system using Socket.io with message history, online/offline status indicators, and file sharing capabilities.",
+      "Designed responsive user interface using React.js and Mantine component library ensuring seamless cross-platform user experience."
+    ],
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.io", "JWT", "Redux", "Mantine UI"],
+    githubUrl: "https://github.com/NEHA-AMIN/Social-Media",
+    category: "Full-Stack Development",
+    status: "Completed",
+    image: "/images/projects/social-media.png"
+  }
+]
+---
+
+<DefaultLayout
+  title="Projects - Neha Amin"
+  description="Explore my portfolio of AI, machine learning, and full-stack development projects"
+>
+  <section class="my-12">
+    <div class="container">
+      <PageHeader 
+        title="Projects"
+        subtitle="Innovative solutions in AI, Computer Vision, and Full-Stack Development"
+      />
+      
+      <div class="mt-12 projects-grid">
+        {projects.map((project) => (
+          <ProjectCard 
+            title={project.title}
+            description={project.description}
+            fullDescription={project.fullDescription}
+            technologies={project.technologies}
+            githubUrl={project.githubUrl}
+            category={project.category}
+            status={project.status}
+            image={project.image}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: var(--space-l);
+    }
+  }
+</style>

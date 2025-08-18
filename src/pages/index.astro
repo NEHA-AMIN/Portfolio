@@ -1,0 +1,318 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import IntroCinematic from '@components/IntroCinematic.astro'
+import Hero from '@components/Hero.astro'
+import Feature from '@components/Feature.astro'
+import HackathonSlider from '@components/HackathonSlider.astro'
+import IeeeTemsconSlider from '@components/IeeeTemsconSlider.astro'
+import MunSlider from '@components/MunSlider.astro'
+import ExternalLink from '@components/ExternalLink.astro'
+---
+
+<DefaultLayout title="Home">
+  <IntroCinematic title="Neha's Portfolio" />
+  <Hero />
+  <section class="my-64">
+    <div class="container">
+      <h2 class="mb-16 text-6xl">Highlights</h2>
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <Feature icon="lucide:trophy" title="Academic Achievements">
+          2× Gold Medalist in National Science Olympiad (NSO) and International English Olympiad (IEO), demonstrating excellence in STEM and communication.
+        </Feature>
+        <Feature icon="lucide:file-text" title="Research Publications">
+          Published research papers on advanced Nanogenerator technologies, energy harvesting systems, and AI applications in space science exploration.
+        </Feature>
+        <Feature icon="lucide:users" title="Leadership Excellence">
+          Vice Chairperson of IEEE Student Branch DSU, leading community engagement initiatives and fostering technical innovation among peers.
+        </Feature>
+        <Feature icon="lucide:activity" title="Time Series Transformers">
+          Currently developing advanced Time Series Transformers at PRL (ISRO) for superior sequence prediction using self-attention mechanisms and CNN integration.
+        </Feature>
+        <Feature icon="lucide:mic" title="Community Speaker">
+          Joined MagicBall community and conducted events as a Public Speaker, sharing knowledge and inspiring audiences through engaging presentations.
+        </Feature>
+        <Feature icon="lucide:github" title="Open Source Contributor">
+          Actively contributing to full stack development projects in the open source community, specializing in Next.js and FastAPI technologies.
+        </Feature>
+      </div>
+    </div>
+  </section>
+  <section class="hackathon-section my-64">
+    <div class="container">
+      <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+        <div class="hackathon-slider-wrapper">
+          <HackathonSlider />
+        </div>
+        <div class="hackathon-content">
+          <h2 class="text-4xl lg:text-6xl mb-6">Hosted the first ever inter continental hackathon @DSU</h2>
+          <div class="hackathon-details">
+            <ul class="text-lg lg:text-xl text-muted mb-6">
+              <li>30 hours of non-stop innovation</li>
+              <li>20-member powerhouse crew preparing for 2 months</li>
+              <li>Orchestrated Seamless execution - across timezones (Texas & India)</li>
+              <li>Nationwide participation from India's brightest minds</li>
+              <li>Championing the theme: Computing for Social Good</li>
+            </ul>
+            <p class="my-role text-lg lg:text-xl">My role ? Lead Student Coordinator, representing DSU</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="temscon-section my-64">
+    <div class="container">
+      <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+        <div class="temscon-content">
+          <h2 class="text-4xl lg:text-6xl mb-6">IEEE TEMSCON</h2>
+          <div class="temscon-details">
+            <ul class="text-lg lg:text-xl text-muted mb-6">
+              <li>Chosen as my college's Lead Volunteer for <strong><em>IEEE TEMSCON ASPAC hosted for the first time in India</em></strong></li>
+              <li>Supported a <strong><em>prestigious conference with speakers from all over the world</em></strong> handling registrations, tracks, and stage management</li>
+              <li>Represented my institute @ <strong><em>World Trade Centre Bangalore</em></strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="temscon-slider-wrapper">
+          <IeeeTemsconSlider />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="munsoc-section my-64">
+    <div class="container">
+      <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+        <div class="munsoc-slider-wrapper">
+          <MunSlider />
+        </div>
+        <div class="munsoc-content">
+          <h2 class="text-4xl lg:text-6xl mb-6">MUNSOC - DSU</h2>
+          <div class="munsoc-details">
+            <ul class="text-lg lg:text-xl text-muted mb-6">
+              <li>Served as <strong><em>Secretary General</em></strong> leading the Model United Nations Society</li>
+              <li>Organized and facilitated <strong><em>diplomatic simulations and debates</em></strong> enhancing students' global awareness</li>
+              <li>Managed a team of delegates while fostering <strong><em>international relations knowledge and public speaking skills</em></strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .avatar {
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-s);
+  }
+
+  .hackathon-section {
+    .hackathon-content {
+      h2 {
+        font-family: 'Work Sans', sans-serif;
+        background: linear-gradient(
+          135deg,
+          light-dark(var(--color-primary-400), var(--color-secondary-200)) 0%,
+          light-dark(var(--color-secondary-400), var(--color-primary-200)) 100%
+        );
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800; /* Extra bold for Work Sans */
+        line-height: 1.2;
+        margin-bottom: var(--space-l);
+      }
+
+      p {
+        color: var(--foreground-color-muted);
+        line-height: 1.6;
+      }
+
+      .hackathon-details {
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--foreground-color-muted);
+            line-height: 1.6;
+
+            &::before {
+              content: '•';
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: var(--color-primary-400);
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .my-role {
+          color: var(--foreground-color);
+          font-weight: bold;
+          font-style: italic;
+          margin-top: 1.5rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border-color-subtle);
+        }
+      }
+    }
+
+    .hackathon-slider-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hackathon-content {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+    }
+  }
+
+  .temscon-section {
+    .temscon-content {
+      h2 {
+        font-family: 'Work Sans', sans-serif;
+        background: linear-gradient(
+          135deg,
+          light-dark(var(--color-primary-400), var(--color-secondary-200)) 0%,
+          light-dark(var(--color-secondary-400), var(--color-primary-200)) 100%
+        );
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800; /* Extra bold for Work Sans */
+        line-height: 1.2;
+        margin-bottom: var(--space-l);
+      }
+
+      p {
+        color: var(--foreground-color-muted);
+        line-height: 1.6;
+      }
+
+      .temscon-details {
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--foreground-color-muted);
+            line-height: 1.6;
+
+            &::before {
+              content: '•';
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: var(--color-primary-400);
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .temscon-slider-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .temscon-content {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+    }
+  }
+
+  .munsoc-section {
+    .munsoc-content {
+      h2 {
+        font-family: 'Work Sans', sans-serif;
+        background: linear-gradient(
+          135deg,
+          light-dark(var(--color-primary-400), var(--color-secondary-200)) 0%,
+          light-dark(var(--color-secondary-400), var(--color-primary-200)) 100%
+        );
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800; /* Extra bold for Work Sans */
+        line-height: 1.2;
+        margin-bottom: var(--space-l);
+      }
+
+      p {
+        color: var(--foreground-color-muted);
+        line-height: 1.6;
+      }
+
+      .munsoc-details {
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--foreground-color-muted);
+            line-height: 1.6;
+
+            &::before {
+              content: '•';
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: var(--color-primary-400);
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .munsoc-slider-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .munsoc-content {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+    }
+  }
+</style>

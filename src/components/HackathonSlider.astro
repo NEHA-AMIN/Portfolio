@@ -1,0 +1,149 @@
+---
+/**
+ * HackathonSlider Component (Astro)
+ * Simple sequential slider - All 7 hackathon images
+ */
+const IMAGES = [
+  `/images/hackathon/img1.jpeg`,
+  `/images/hackathon/img2.jpeg`,
+  `/images/hackathon/img3.jpeg`,
+  `/images/hackathon/img4.jpeg`,
+  `/images/hackathon/img5.jpeg`,
+  `/images/hackathon/img6.jpeg`,
+  `/images/hackathon/img7.jpeg`
+];
+---
+<div class="hackathon-slider">
+  <div class="slider-container">
+    <div class="slider-track">
+      {IMAGES.map((src, i) => (
+        <img 
+          src={src} 
+          alt={`Hackathon moment ${i+1}`} 
+          class={i === 0 ? 'active' : ''} 
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    console.log('Hackathon slider starting...');
+    
+    setTimeout(() => {
+      const images = document.querySelectorAll('.hackathon-slider .slider-track img');
+      
+      console.log('Found hackathon images:', images.length);
+      console.log('Image sources:', Array.from(images).map(img => img.src));
+      
+      let currentIndex = 0;
+      
+      function showImage(index) {
+        console.log('Showing hackathon image:', index, 'of', images.length);
+        
+        // Ensure index is within bounds
+        const safeIndex = index % images.length;
+        
+        // Hide all images first
+        images.forEach((img, i) => {
+          img.classList.remove('active');
+        });
+        
+        // Show the current image
+        if (images[safeIndex]) {
+          images[safeIndex].classList.add('active');
+        }
+      }
+      
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        console.log('Next hackathon image index:', currentIndex);
+        showImage(currentIndex);
+      }
+      
+      // Ensure first image is shown
+      showImage(0);
+      
+      // Auto advance every 3 seconds
+      setInterval(nextImage, 3000);
+      
+      // Preload all images to prevent white flashes
+      images.forEach((img, i) => {
+        img.addEventListener('load', () => {
+          console.log(`Hackathon image ${i + 1} loaded successfully:`, img.src);
+        });
+        
+        img.addEventListener('error', (e) => {
+          console.error(`Hackathon image ${i + 1} failed to load:`, img.src, e);
+        });
+        
+        // Force reload if not already loaded
+        if (!img.complete) {
+          const newSrc = img.src;
+          img.src = '';
+          img.src = newSrc;
+        }
+      });
+      
+    }, 100);
+  })();
+</script>
+
+<style lang="scss">
+  .hackathon-slider {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    background: #000; /* Ensure black background instead of white */
+  }
+
+  .slider-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    background: #000; /* Black background to prevent white flashes */
+  }
+
+  .slider-track {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000; /* Ensure consistent background */
+  }
+
+  .slider-track img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; /* Smoother transition */
+    background: #000; /* Prevent white flash during loading */
+  }
+
+  .slider-track img.active {
+    opacity: 1;
+  }
+
+  /* Ensure first image is positioned correctly */
+  .slider-track img:first-child {
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .slider-container { 
+      height: 300px; 
+    }
+    .hackathon-slider { 
+      max-width: 100%; 
+    }
+  }
+</style>

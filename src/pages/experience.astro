@@ -1,0 +1,135 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import ExperienceCard from '../components/ExperienceCard.astro'
+import PageHeader from '../components/PageHeader.astro'
+
+const experiences = [
+  {
+    company: "Physical Research Laboratory (ISRO)",
+    position: "Research Intern, Department of Space Science",
+    location: "Ahmedabad, India",
+    duration: "Apr 2025 – Present",
+    type: "current",
+    logo: "/images/logos/prl-logo.png",
+    logoLink: "https://drive.google.com/file/d/1JuySGij3lpk2ebgcW_BYEgZOsp_m5x1T/view?usp=drivesdk",
+    description: [
+      "Working on Time Series Transformers for Superior Sequence Prediction.",
+      "Leveraging self-attention mechanisms to capture long-range dependencies, based on Zhou's 2020-base Informer model.",
+      "Specialized in encoding techniques—Rotary Positional Encoding, United Positional Encoding, Convolutional Sine PE.",
+      "Integrated a CNN backbone into the transformer architecture post-channel encoding for enhanced feature extraction.",
+      "Developed a state-of-the-art model that outperforms alternatives in prediction accuracy and scalability across diverse applications."
+    ],
+    technologies: ["Time Series Analysis", "Transformers", "CNN", "Self-Attention", "Python", "Deep Learning"]
+  },
+  {
+    company: "Dijkstra Web",
+    position: "Open Source Contributor & Team Lead",
+    location: "Remote",
+    duration: "Present",
+    type: "current",
+    logo: "/images/logos/dijkstra-web.jpeg",
+    logoLink: "https://github.com/Dijkstra-Edu/Dijkstra-Web",
+    description: [
+      "Leading a dynamic team of 4 developers in building innovative educational technology solutions.",
+      "Spearheading UI/UX design and frontend development using Next.js and modern component libraries.",
+      "Architecting and implementing responsive user interfaces with shadcn/ui components for enhanced user experience.",
+      "Pioneering the development of an AI-powered resume builder that eliminates the need for LaTeX coding knowledge.",
+      "Leveraging artificial intelligence to generate tailored resumes based on specific job roles and requirements.",
+      "Driving major contributions in frontend development, establishing design systems and component architecture."
+    ],
+    technologies: ["Next.js", "React", "shadcn/ui", "TypeScript", "Tailwind CSS", "AI Integration", "Team Leadership", "UI/UX Design"]
+  },
+  {
+    company: "Collegites AI",
+    position: "AI Research Intern",
+    location: "Remote",
+    duration: "Jun 2025 – Present",
+    type: "current",
+    logo: "/images/logos/collegites-ai.svg",
+    logoLink: "https://drive.google.com/file/d/135gXEeFhr79joxSk_BysgGCyp1Okhb-U/view?usp=drivesdk",
+    description: [
+      "Developed the Blog Generator and White Paper Generator tools, achieving over 1.2K users.",
+      "Designed and implemented multi-agent architectures with CrewAI.",
+      "Passionate about prompt engineering—designing multi-modal prompts and using ROUGE and BLEU scores to evaluate and refine LLM outputs."
+    ],
+    technologies: ["CrewAI", "LangChain", "Streamlit", "Prompt Engineering", "ROUGE", "BLEU", "Multi-Agent Systems"]
+  },
+  {
+    company: "Monkify.ai",
+    position: "AI and ML Intern",
+    location: "Bangalore, India (Remote)",
+    duration: "Oct 2024 – Mar 2025",
+    type: "past",
+    logo: "/images/logos/monkify.webp",
+    description: [
+      "Developed a custom LLM chatbot that delivers dynamic FAQs, guides job applications, and blends rule-based logic with deep learning for truly contextual interactions.",
+      "Built an end-to-end data pipeline to cleanse and standardize job posts, resumes, and user interactions—handling deduplication, missing values, date/location normalization, and categorical encoding—to sharpen recommendations.",
+      "Engineered an AI-driven job–candidate matcher, using NLP for job analysis, multi-format resume parsing, skill-based scoring, and automated matching to streamline recruitment."
+    ],
+    technologies: ["LLM", "NLP", "Data Pipeline", "Chatbot Development", "Machine Learning", "Resume Parsing", "Python"]
+  },
+  {
+    company: "Igebra.ai",
+    position: "Generative AI Intern",
+    location: "Remote",
+    duration: "Jun 2024 – Oct 2024",
+    type: "past",
+    logo: "/images/logos/igebra-ai.png",
+    logoLink: "https://drive.google.com/file/d/135gXEeFhr79joxSk_BysgGCyp1Okhb-U/view?usp=drivesdk",
+    description: [
+      "Developed innovative AI tools using Python and leading Generative AI platforms to revolutionize educational experiences.",
+      "Contributed to the development of generative AI models for media and education using Python and FastAPI frameworks.",
+      "Designed and implemented AI features for real-time data processing, significantly enhancing educational content delivery.",
+      "Conducted interactive educational sessions teaching AI concepts to children, including hands-on image and video generation workshops.",
+      "Contributed to the architecture and development of a comprehensive Course Management System (CMS) for efficient educational content management.",
+      "Developed scalable full-stack applications integrating React.js frontend with SQL backend functionality.",
+      "Successfully deployed AI tools to automate and optimize critical business processes, improving operational efficiency."
+    ],
+    technologies: ["Python", "FastAPI", "Generative AI", "React.js", "SQL", "Course Management Systems", "Real-time Data Processing", "AI Education"]
+  }
+]
+---
+
+<DefaultLayout
+  title="Experience - Neha's Portfolio"
+  description="My professional experience in AI, Machine Learning, and Research"
+>
+  <section class="my-12">
+    <div class="container">
+      <PageHeader 
+        title="Experience"
+        subtitle="My journey in AI, Machine Learning, and Research"
+      />
+      
+      <div class="mt-12 experience-list">
+        {experiences.map((experience) => (
+          <div class="experience-item">
+            <ExperienceCard 
+              company={experience.company}
+              position={experience.position}
+              location={experience.location}
+              duration={experience.duration}
+              type={experience.type}
+              description={experience.description}
+              technologies={experience.technologies}
+              logo={experience.logo}
+              logoLink={experience.logoLink}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    .experience-item {
+      margin-bottom: var(--space-l);
+    }
+  }
+</style>

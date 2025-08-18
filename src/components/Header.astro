@@ -1,0 +1,58 @@
+---
+import Navigation from '../components/Navigation.astro'
+import { DarkMode, SkipLink } from 'accessible-astro-components'
+import { Icon } from 'astro-icon/components'
+
+/**
+ * Header Component
+ *
+ * @description A component that displays the header of the website
+ */
+---
+
+<header>
+  <SkipLink />
+  <Navigation>
+    <li class="menu-item">
+      <a href="/">Home</a>
+    </li>
+    <li class="menu-item">
+      <a href="/projects/">Projects</a>
+    </li>
+    <li class="menu-item">
+      <a href="/experience/">Experience</a>
+    </li>
+    <li class="menu-item type-icon animate-rotate">
+      <a href="https://github.com/NEHA-AMIN" target="_blank" rel="noopener noreferrer">
+        <Icon name="lucide:github" />
+        <span class="sr-only">Visit GitHub profile</span>
+      </a>
+    </li>
+    <li class="menu-item type-icon animate-rotate">
+      <a href="https://www.linkedin.com/in/neha-a-68b193248/" target="_blank" rel="noopener noreferrer">
+        <Icon name="lucide:linkedin" />
+        <span class="sr-only">Visit LinkedIn profile</span>
+      </a>
+    </li>
+    <li class="menu-item type-icon animate-rotate">
+      <DarkMode>
+        <Icon name="lucide:moon" slot="light" />
+        <Icon name="lucide:sun" slot="dark" />
+      </DarkMode>
+    </li>
+  </Navigation>
+</header>
+
+<style lang="scss" is:global>
+  header {
+    .type-icon {
+      display: block;
+      margin-inline: -7px;
+
+      svg {
+        inline-size: 30px;
+        block-size: 30px;
+      }
+    }
+  }
+</style>

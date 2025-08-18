@@ -1,0 +1,304 @@
+---
+import { Icon } from 'astro-icon/components'
+
+/**
+ * Experience Card Component
+ *
+ * @description A reusable component to display work experience details
+ */
+interface Props {
+  company: string
+  position: string
+  location: string
+  duration: string
+  type?: 'current' | 'past'
+  description: string[]
+  technologies?: string[]
+  logo?: string
+  logoLink?: string
+}
+
+const { 
+  company, 
+  position, 
+  location, 
+  duration, 
+  type = 'past',
+  description, 
+  technologies = [],
+  logo,
+  logoLink
+}: Props = Astro.props
+---
+
+<article class="experience-card">
+  <div class="experience-header">
+    <div class="company-info">
+      <h3 class="company-name">{company}</h3>
+      <p class="position-title">{position}</p>
+      <div class="meta-info">
+        <span class="location">
+          <Icon name="lucide:map-pin" size="16" />
+          {location}
+        </span>
+        <span class="duration">
+          <Icon name="lucide:calendar" size="16" />
+          {duration}
+        </span>
+        {type === 'current' && (
+          <span class="current-badge">
+            <Icon name="lucide:zap" size="14" />
+            Current
+          </span>
+        )}
+      </div>
+    </div>
+    {logo && (
+      <div class="company-logo">
+        {logoLink ? (
+          <a href={logoLink} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${company} website`}>
+            <img src={logo} alt={`${company} logo`} />
+          </a>
+        ) : (
+          <img src={logo} alt={`${company} logo`} />
+        )}
+      </div>
+    )}
+  </div>
+
+  <div class="experience-content">
+    <ul class="responsibilities">
+      {description.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+
+    {technologies.length > 0 && (
+      <div class="technologies">
+        <h4>Technologies & Skills:</h4>
+        <div class="tech-tags">
+          {technologies.map((tech) => (
+            <span class="tech-tag">{tech}</span>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</article>
+
+<style lang="scss">
+  .experience-card {
+    background: var(--background-color-subtle);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
+    padding: var(--space-l);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      border-radius: 0 var(--radius-s) var(--radius-s) 0;
+    }
+
+    &:hover {
+      border: 3px solid cyan;
+      box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.3),
+        0 0 40px rgba(0, 255, 255, 0.2),
+        0 8px 32px rgba(0, 255, 255, 0.15);
+      transform: translateY(-3px);
+      
+      &::before {
+        background: linear-gradient(to bottom, cyan, var(--primary-color));
+        width: 6px;
+      }
+
+      .company-info .company-name {
+        color: cyan;
+      }
+    }
+
+    .experience-header {
+      margin-bottom: var(--space-m);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-m);
+
+      .company-info {
+        flex: 1;
+
+        .company-name {
+          font-size: var(--font-size-xl);
+          font-weight: 700;
+          color: var(--primary-color);
+          margin-bottom: var(--space-2xs);
+          line-height: 1.2;
+          transition: color var(--animation-speed-fast) var(--cubic-bezier);
+        }
+
+        .position-title {
+          font-size: var(--font-size-l);
+          font-weight: 600;
+          color: var(--foreground-color);
+          margin-bottom: var(--space-s);
+        }
+
+        .meta-info {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-m);
+          align-items: center;
+          font-size: var(--font-size-s);
+          color: var(--foreground-color-muted);
+
+          .location,
+          .duration {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4xs);
+          }
+
+          .current-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-4xs);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-4xs) var(--space-2xs);
+            border-radius: var(--radius-s);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+
+      .company-logo {
+        flex-shrink: 0;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--background-color);
+        border: 1px solid var(--border-color-subtle);
+        border-radius: var(--radius-m);
+        padding: var(--space-xs);
+        transition: all var(--animation-speed-fast) var(--cubic-bezier);
+        cursor: pointer;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          text-decoration: none;
+          border-radius: var(--radius-m);
+          transition: all var(--animation-speed-fast) var(--cubic-bezier);
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: grayscale(20%);
+          transition: filter var(--animation-speed-fast) var(--cubic-bezier);
+        }
+
+        &:hover img {
+          filter: grayscale(0%);
+        }
+      }
+    }
+
+    .experience-content {
+      .responsibilities {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-m);
+
+        li {
+          position: relative;
+          padding-left: var(--space-m);
+          margin-bottom: var(--space-xs);
+          line-height: 1.6;
+          color: var(--foreground-color);
+
+          &::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .technologies {
+        border-top: 1px solid var(--border-color-subtle);
+        padding-top: var(--space-s);
+
+        h4 {
+          font-size: var(--font-size-s);
+          font-weight: 600;
+          margin-bottom: var(--space-xs);
+          color: var(--foreground-color-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-2xs);
+
+          .tech-tag {
+            background: var(--background-color);
+            color: var(--foreground-color);
+            padding: var(--space-4xs) var(--space-xs);
+            border: 1px solid var(--border-color-subtle);
+            border-radius: var(--radius-s);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+            transition: all var(--animation-speed-fast) var(--cubic-bezier);
+
+            &:hover {
+              border-color: cyan;
+              color: cyan;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .experience-card {
+      .experience-header .company-info .meta-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+      }
+    }
+  }
+</style>

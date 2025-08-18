@@ -1,0 +1,111 @@
+---
+/**
+ * IeeeTemsconSlider Component (Astro)
+ * Simple sequential slider - All 4 IEEE TEMSCON images
+ */
+const IMAGES = [
+  `/images/ieee-temscon/img1.jpg`,
+  `/images/ieee-temscon/img2.jpg`,
+  `/images/ieee-temscon/img3.jpg`,
+  `/images/ieee-temscon/img4.jpg`
+];
+---
+<div class="ieee-temscon-slider">
+  <div class="slider-container">
+    <div class="slider-track">
+      {IMAGES.map((src, i) => (
+        <img 
+          src={src} 
+          alt={`IEEE TEMSCON moment ${i+1}`} 
+          class={i === 0 ? 'active' : ''} 
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    console.log('IEEE TEMSCON slider starting...');
+    
+    setTimeout(() => {
+      const images = document.querySelectorAll('.ieee-temscon-slider .slider-track img');
+      
+      console.log('Found IEEE TEMSCON images:', images.length);
+      console.log('Image sources:', Array.from(images).map(img => img.src));
+      
+      let currentIndex = 0;
+      
+      function showImage(index) {
+        console.log('Showing IEEE TEMSCON image:', index);
+        
+        // Hide all images
+        images.forEach((img, i) => {
+          img.classList.toggle('active', i === index);
+        });
+      }
+      
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      }
+      
+      // Auto-advance every 3 seconds
+      setInterval(nextImage, 3000);
+      
+    }, 100); // Small delay to ensure DOM is ready
+  })();
+</script>
+
+<style>
+  .ieee-temscon-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider-track img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: 12px;
+  }
+
+  .slider-track img.active {
+    opacity: 1;
+  }
+
+  .slider-track img:first-child {
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .ieee-temscon-slider {
+      border-radius: 8px;
+    }
+    
+    .slider-track img {
+      border-radius: 8px;
+    }
+  }
+</style>
