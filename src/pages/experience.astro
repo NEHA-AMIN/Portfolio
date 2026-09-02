@@ -3,13 +3,32 @@ import DefaultLayout from '../layouts/DefaultLayout.astro'
 import ExperienceCard from '../components/ExperienceCard.astro'
 import PageHeader from '../components/PageHeader.astro'
 
+const evamLabsLogo = encodeURI('/images/logos/Screenshot 2026-09-02 at 9.24.53 PM.png')
+
 const experiences = [
+  {
+    company: "IBM",
+    position: "AI Engineering Intern, Bob Agentic IDE",
+    location: "Bangalore, India",
+    duration: "Feb 2026 – Present",
+    type: "current",
+    logo: "/images/logos/ibm-logo.png",
+    description: [
+      "Joined IBM after winning Bobathon in the first week of February 2026, where my team secured first place with a triple-helix architecture for an agentic evaluation system.",
+      "Building Bob, an agentic IDE that modernizes legacy mainframe languages such as COBOL and PL/I.",
+      "Designing the agentic architecture that powers the IDE and orchestrates modernization workflows end to end.",
+      "Implementing tool-calling sub-agent orchestration in TypeScript against the Bob API runtime.",
+      "Building guardrailing and validation layers so unsafe or incomplete AI outputs do not propagate downstream.",
+      "Specializing in agentic workflow orchestration, deployment guardrails, and structured YAML-backed context pipelines fed by Python ML tooling."
+    ],
+    technologies: ["TypeScript", "Python", "Agentic Orchestration", "Tool Calling", "AI Guardrails", "YAML Pipelines"]
+  },
   {
     company: "Physical Research Laboratory (ISRO)",
     position: "Research Intern, Department of Space Science",
     location: "Ahmedabad, India",
-    duration: "Apr 2025 – Present",
-    type: "current",
+    duration: "Apr 2025 – Sep 2025",
+    type: "past",
     logo: "/images/logos/prl-logo.png",
     logoLink: "https://drive.google.com/file/d/1JuySGij3lpk2ebgcW_BYEgZOsp_m5x1T/view?usp=drivesdk",
     description: [
@@ -20,6 +39,20 @@ const experiences = [
       "Developed a state-of-the-art model that outperforms alternatives in prediction accuracy and scalability across diverse applications."
     ],
     technologies: ["Time Series Analysis", "Transformers", "CNN", "Self-Attention", "Python", "Deep Learning"]
+  },
+  {
+    company: "Evam Labs",
+    position: "AI and Data Intern",
+    location: "Bangalore, India",
+    duration: "Oct 2025 – Jan 2026",
+    type: "past",
+    logo: evamLabsLogo,
+    description: [
+      "Built scalable Apache Spark and PySpark data pipelines to process and transform large volumes of raw geophysical data for downstream AI workflows.",
+      "Implemented data cleaning, standardization, and quality-validation steps to handle missing, duplicate, and inconsistent records.",
+      "Prepared validated golden datasets and model-ready data to support reliable AI model training and evaluation."
+    ],
+    technologies: ["Apache Spark", "PySpark", "Python", "SQL", "Parquet", "Git"]
   },
   {
     company: "Dijkstra Web",
@@ -44,7 +77,7 @@ const experiences = [
     position: "AI Research Intern",
     location: "Remote",
     duration: "Jun 2025 – Present",
-    type: "current",
+    type: "past",
     logo: "/images/logos/collegites-ai.svg",
     logoLink: "https://drive.google.com/file/d/135gXEeFhr79joxSk_BysgGCyp1Okhb-U/view?usp=drivesdk",
     description: [
